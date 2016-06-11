@@ -1,0 +1,19 @@
+{
+    "name": "dandart/multiorm",
+    "description": "Multi-purpose ORM",
+    "type": "library",
+    "license": "AGPL-3",
+    "authors": [
+        {
+            "name": "Dan Dart",
+            "email": "github@dandart.co.uk"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Dandart\\MultiORM\\": "src/Dandart/MultiORM/"
+        }
+    }
+}
