@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with MultiORM. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    MultiORM
- * @author     Dan Dart
- * @copyright  2016 MultiORM
- * @license    http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
- * @version    git
- * @link       https://github.com/dandart/multiorm
+ * @package   MultiORM
+ * @author    Dan Dart
+ * @copyright 2016 MultiORM
+ * @license   http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
+ * @version   git
+ * @link      https://github.com/dandart/multiorm
 **/
 namespace MultiORM\Dao\Mongo;
 
@@ -95,26 +95,26 @@ abstract class MongoAbstract implements DaoInterface
             if($objField->bIsDirty()) {
                 $strClass = get_class($objField);
                 switch($strClass) {
-                    case Field::class:
-                        $arrUpdate[$strPrefix.$strFieldName] = $this->_textToSafe($objField->getValue(null));
-                        break;
-                    case ReadOnly::class:
-                    case FieldId::class:
-                        // Ids do not update
-                        break;
-                    case Collection::class:
-                        foreach($objField as $hash) {
-                            foreach(
-                                $this->_getUpdateArray(
-                                    $hash->getFields($this),
-                                    $strFieldName.'.'.$hash->getId().'.'
-                                ) as $strField => $mixedValue) {
-                                $arrUpdate[$strField] = $mixedValue;
-                            }
+                case Field::class:
+                    $arrUpdate[$strPrefix.$strFieldName] = $this->_textToSafe($objField->getValue(null));
+                    break;
+                case ReadOnly::class:
+                case FieldId::class:
+                    // Ids do not update
+                    break;
+                case Collection::class:
+                    foreach($objField as $hash) {
+                        foreach(
+                            $this->_getUpdateArray(
+                                $hash->getFields($this),
+                                $strFieldName.'.'.$hash->getId().'.'
+                            ) as $strField => $mixedValue) {
+                            $arrUpdate[$strField] = $mixedValue;
                         }
-                        break;
-                    default:
-                        throw new Exception('Not Implemented class '.$strClass);
+                    }
+                    break;
+                default:
+                    throw new Exception('Not Implemented class '.$strClass);
                 }
             }
         }
@@ -127,8 +127,9 @@ abstract class MongoAbstract implements DaoInterface
     }
     protected function _getCollection()
     {
-        if(is_null($this->_mongoCollection))
+        if(is_null($this->_mongoCollection)) {
             $this->_mongoCollection = new Mongo_Collection($this->_strDatabase, $this->_getCollectionName());
+        }
         return $this->_mongoCollection;
     }
 
@@ -138,8 +139,9 @@ abstract class MongoAbstract implements DaoInterface
     }
     protected function _getConnection()
     {
-        if(is_null($this->_mongoConnection))
+        if(is_null($this->_mongoConnection)) {
             $this->_mongoConnection = new Mongo_Connection();
+        }
         return $this->_mongoConnection;
     }
 
@@ -148,7 +150,7 @@ abstract class MongoAbstract implements DaoInterface
         return $this->_getConnection()->distinct($this->_strDatabase, $strCollection, $strKey, $arrCommand);
     }
 
-   // abstract protected function _convertToModel(Array $arrMongo);
+    // abstract protected function _convertToModel(Array $arrMongo);
 
     // You must implement delete()
     // You must implement save()

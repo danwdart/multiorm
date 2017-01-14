@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with MultiORM. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    MultiORM
- * @author     Dan Dart
- * @copyright  2016 MultiORM
- * @license    http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
- * @version    git
- * @link       https://github.com/dandart/multiorm
+ * @package   MultiORM
+ * @author    Dan Dart
+ * @copyright 2016 MultiORM
+ * @license   http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
+ * @version   git
+ * @link      https://github.com/dandart/multiorm
 **/
 namespace MultiORM\Dao\Sql;
 
@@ -128,14 +128,14 @@ abstract class SqlAbstract implements DaoInterface
             if($objField->bIsDirty()) {
                 $strClass = get_class($objField);
                 switch($strClass) {
-                    case Field::class:
-                    case FieldId::class:
-                        $arrUpdate[$strFieldName] = $this->_textToSafe($objField->getValue(null));
-                        break;
-                    case Readonly::class:
-                        break;
-                    default:
-                        throw new Exception('Unmanaged class: '.$strClass);
+                case Field::class:
+                case FieldId::class:
+                    $arrUpdate[$strFieldName] = $this->_textToSafe($objField->getValue(null));
+                    break;
+                case Readonly::class:
+                    break;
+                default:
+                    throw new Exception('Unmanaged class: '.$strClass);
                 }
             }
         }

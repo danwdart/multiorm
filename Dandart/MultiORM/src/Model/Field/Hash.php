@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with MultiORM. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    MultiORM
- * @author     Dan Dart
- * @copyright  2016 MultiORM
- * @license    http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
- * @version    git
- * @link       https://github.com/dandart/multiorm
+ * @package   MultiORM
+ * @author    Dan Dart
+ * @copyright 2016 MultiORM
+ * @license   http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
+ * @version   git
+ * @link      https://github.com/dandart/multiorm
 **/
 namespace MultiORM\Model\Field;
 
@@ -144,25 +144,26 @@ class Hash extends FieldAbstract implements JsonSerializable
         foreach($this->_collFields as $strFieldName => $objField) {
             $strClass = get_class($objField);
             switch($strClass) {
-                case Field::class:
-                case Readonly::class:
-                case FieldId::class:
-                    $arrOut[$strFieldName] = $objField->getValue(null);
-                    break;
-                case Collection::class:
-                    foreach($objField as $hash) {
-                        foreach(
-                            $this->_getModelArray($hash->_collFields
-                            ) as $strField => $mixedValue) {
-                            if (!isset($arrOut[$strFieldName])) {
-                                $arrOut[$strFieldName] = [];
-                            }
-                            $arrOut[$strFieldName][$strField] = $mixedValue;
+            case Field::class:
+            case Readonly::class:
+            case FieldId::class:
+                $arrOut[$strFieldName] = $objField->getValue(null);
+                break;
+            case Collection::class:
+                foreach($objField as $hash) {
+                    foreach(
+                        $this->_getModelArray(
+                            $hash->_collFields
+                        ) as $strField => $mixedValue) {
+                        if (!isset($arrOut[$strFieldName])) {
+                            $arrOut[$strFieldName] = [];
                         }
+                        $arrOut[$strFieldName][$strField] = $mixedValue;
                     }
-                    break;
-                default:
-                    throw new Exception('Not Implemented class '.$strClass);
+                }
+                break;
+            default:
+                throw new Exception('Not Implemented class '.$strClass);
             }
         }
         return $arrOut;

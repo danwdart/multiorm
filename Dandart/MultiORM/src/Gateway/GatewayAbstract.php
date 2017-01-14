@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with MultiORM. If not, see <http://www.gnu.org/licenses/>.
  *
- * @package    MultiORM
- * @author     Dan Dart
- * @copyright  2016 MultiORM
- * @license    http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
- * @version    git
- * @link       https://github.com/dandart/multiorm
+ * @package   MultiORM
+ * @author    Dan Dart
+ * @copyright 2016 MultiORM
+ * @license   http://www.gnu.org/licenses/agpl-3.0.html GNU AGPL 3.0
+ * @version   git
+ * @link      https://github.com/dandart/multiorm
 **/
 namespace MultiORM\Gateway;
 
